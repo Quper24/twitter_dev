@@ -114,7 +114,6 @@ class Post {
 		this.text = text;
 		this.img = img;
 		this.likes = likes;
-		console.log(this);
 	}
 
 	changeLike() {
@@ -142,7 +141,3 @@ class Post {
 new Twitter({
 	listElem: '.tweet-list',
 })
-
-
-
-

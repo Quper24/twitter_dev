@@ -15,19 +15,11 @@ class FetchData {
 
 class Twitter {
 	constructor({listElem}) {
-		const fetchData = new FetchData();
 		this.posts = new Posts();
 		this.sortDate = true;
 		this.elements = {
 			listElem: document.querySelector(listElem),
 		}
-		fetchData.getPosts()
-			.then(data => {
-				data.forEach(item => this.posts.addPost(item));
-				this.renderPosts();
-			})
-
-
 	}
 	renderPosts() {
 		this.elements.listElem.textContent = '';
@@ -56,10 +48,10 @@ class Twitter {
 								<div class="tweet-post">
 									<p class="tweet-post__text">${text}</p>
 									${img ?
-										`<figure class="tweet-post__image">
-											<img src="${img}">
+				`<figure class="tweet-post__image">
+											<img src="https://images.pexels.com/photos/6432931/pexels-photo-6432931.jpeg" alt="Сообщение Марии Lorem ipsum dolor sit amet, consectetur.">
 										</figure>` :
-										''}
+				''}
 								</div>
 							</div>
 						</div>
@@ -87,7 +79,7 @@ class Twitter {
 }
 
 class Posts {
-	constructor(posts = []) {
+	constructor(posts) {
 		this.tweets = posts;
 	}
 
@@ -106,34 +98,18 @@ class Posts {
 
 
 class Post {
-	constructor({id, userName, nickname, postDate = '', text,  img = null, likes = 0,}) {
-		this.id = id ? id : this.generateID();
+	constructor({id, userName, nickname, postDate, text,  img, likes}) {
+		this.id = id;
 		this.userName = userName;
 		this.nickname = nickname;
-		this.postDate = postDate ? new Date(postDate) : new Date();
+		this.postDate = postDate;
 		this.text = text;
 		this.img = img;
 		this.likes = likes;
-		console.log(this);
 	}
 
 	changeLike() {
 		this.likes = !this.likes;
-	}
-
-	generateID() {
-		return Math.random().toString(36).substr(2, 9) + (+new Date()).toString(32)
-	}
-
-	getDate() {
-		const options = {
-			year: 'numeric',
-			month: 'numeric',
-			day: 'numeric',
-			hour: '2-digit',
-			minute: '2-digit'
-		};
-		return this.postDate.toLocaleString('ru-RU', options);
 	}
 
 }
@@ -142,7 +118,3 @@ class Post {
 new Twitter({
 	listElem: '.tweet-list',
 })
-
-
-
-
