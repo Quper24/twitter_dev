@@ -31,15 +31,15 @@ class Twitter {
 	}
 	renderPosts() {
 		this.elements.listElem.textContent = '';
-		this.posts.tweets.forEach(item => {
-			const {
-				id,
-				userName,
-				nickname,
-				text,
-				img,
-				likes
-			} = item;
+		this.posts.tweets.forEach(({
+			id,
+			userName,
+			nickname,
+			text,
+			img,
+			likes
+		}) => {
+			
 			this.elements.listElem.insertAdjacentHTML('beforeend' ,`
 				<li>
 					<article class="tweet">
@@ -117,7 +117,12 @@ class Post {
 	}
 
 	changeLike() {
-		this.likes = !this.likes;
+		this.liked = !this.liked;
+        if (this.liked) {
+            this.likes++;
+        } else {
+            this.likes--;
+        }
 	}
 
 	generateID() {

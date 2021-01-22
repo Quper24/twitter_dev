@@ -109,7 +109,12 @@ class Post {
 	}
 
 	changeLike() {
-		this.likes = !this.likes;
+		this.liked = !this.liked;
+        if (this.liked) {
+            this.likes++;
+        } else {
+            this.likes--;
+        }
 	}
 
 }
